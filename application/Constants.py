@@ -1,4 +1,6 @@
 class Constants:
+    """ Constants representa os valores constantes do jogo Blackjack.
+    """
     TWENTY_ONE = 21
     MIN_PLAYERS = 2
     MAX_PLAYERS = 10

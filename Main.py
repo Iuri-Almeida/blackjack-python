@@ -11,6 +11,10 @@ from random import randint
 
 
 def getChampion(players):
+    """ (list<Player>) -> list<Player>
+
+    Recebe uma lista de Player e retorna uma nova lista de player, podendo estar vazia.
+    """
     champion = []
 
     for player in players:
@@ -22,6 +26,10 @@ def getChampion(players):
 
 
 def getCardValue(card):
+    """ (str) -> int
+
+    Recebe um str e retorna um int baseado no seu valor no baralho.
+    """
     if card.isnumeric(): return int(card)
     else:
         if card == 'A': return 1
@@ -31,6 +39,10 @@ def getCardValue(card):
 
 
 def getCardValues(deck):
+    """ (list<str>) -> str, int
+
+    Recebe uma lista de str e retorna um str e um int baseado no seu valor no baralho.
+    """
     randomNumber = randint(0, len(deck) - 1)
 
     card = deck.pop(randomNumber)
@@ -40,6 +52,10 @@ def getCardValues(deck):
 
 
 def move(deck, player):
+    """ (list<str>, Player) -> None
+
+    Recebe uma lista de str e um Player e modifica seus valores conforme forem jogando.
+    """
     answer = input(f"Você está com {player.getPoints()} ponto(s). Deseja continuar? (s/n) ").strip().lower()
     while answer != 's' and answer != 'n':
         answer = input(f"Tente novamente. Deseja continuar? (s/n) ").strip().lower()
@@ -56,6 +72,10 @@ def move(deck, player):
 
 
 def main():
+    """ (None) -> None
+
+    Função principal do jogo Blackjack.
+    """
     # Lista de jogadores
     players = []
 
@@ -70,7 +90,7 @@ def main():
 
     for i in range(int(n)):
 
-        UI.showPlayer(i)
+        UI.showPlayer(i + 1)
 
         name = input("Digite o nome do jogador: ").strip().title()
 
