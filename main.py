@@ -25,7 +25,7 @@ def findChampion(players: List[Player]) -> List[Player]:
     for player in players:
         if not player.hasOvercomed:
             if not champion or (player.points == champion[0].points): champion.append(player)
-            elif (21 - player.points) < (21 - champion[0].points): champion = [player]
+            elif (Constants.TWENTY_ONE - player.points) < (Constants.TWENTY_ONE - champion[0].points): champion = [player]
     
     return champion
 
