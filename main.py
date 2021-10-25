@@ -4,17 +4,18 @@
 # Data: 24/10/2021
 # Descrição: Jogo de Blackjack
 
-from application.UI import UI
-from application.Constants import Constants
-from entities.Player import Player
+from application.ui import UI
+from application.constants import Constants
+from entities.player import Player
 from random import randint
 from typing import List
 
 
-def getChampion(players: List[Player]) -> List[Player]:
-    """ (list<Player>) -> list<Player>
+def findChampion(players: List[Player]) -> List[Player]:
+    """Encontra o campeão do jogo.
 
-    Recebe uma lista de Player e retorna uma nova lista de player, podendo estar vazia.
+    Keyword arguments:
+        players -- lista de jogadores (type list[Player])
     """
     champion = []
 
@@ -27,9 +28,10 @@ def getChampion(players: List[Player]) -> List[Player]:
 
 
 def getCardValue(card: str) -> int:
-    """ (str) -> int
+    """Pega o valor da carta.
 
-    Recebe um str e retorna um int baseado no seu valor no baralho.
+    Keyword arguments:
+        card -- caractere do baralho (type str)
     """
     if card.isnumeric(): return int(card)
     else:
@@ -40,9 +42,10 @@ def getCardValue(card: str) -> int:
 
 
 def getCard(deck: List[str]) -> str:
-    """ (list<str>) -> str
+    """Pega a carta no baralho de forma randômica.
 
-    Recebe uma lista de str e retorna um str do baralho.
+    Keyword arguments:
+        deck -- lista de caracteres (type list[str])
     """
     randomNumber = randint(0, len(deck) - 1)
 
@@ -52,9 +55,11 @@ def getCard(deck: List[str]) -> str:
 
 
 def move(deck: List[str], player: Player) -> None:
-    """ (list<str>, Player) -> None
+    """Realiza a jogada na partida.
 
-    Recebe uma lista de str e um Player e modifica seus valores conforme forem jogando.
+    Keyword arguments:
+        deck -- lista de caracteres (type list[str])
+        player -- jogador (type Player)
     """
     answer = input(f"Você está com {player.points} ponto(s). Deseja continuar? (s/n) ").strip().lower()
     while answer != 's' and answer != 'n':
@@ -73,9 +78,7 @@ def move(deck: List[str], player: Player) -> None:
 
 
 def main() -> None:
-    """ (None) -> None
-
-    Função principal do jogo Blackjack.
+    """Inicia o jogo.
     """
     players: list[Player] = []
 
@@ -122,7 +125,7 @@ def main() -> None:
                 
                 elif not player.isPlaying: print(f"\nJogador(a) {player.name} decidiu parar de jogar.")
     
-    champion = getChampion(players)
+    champion = findChampion(players)
 
     if champion: UI.showChampion(champion)
     else: UI.noChampion()

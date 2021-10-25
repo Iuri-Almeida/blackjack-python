@@ -1,47 +1,46 @@
 from os import system
 from typing import List
-from entities.Player import Player
+from entities.player import Player
 
 class UI:
     """ UI representa a interface do usuário.
     """
     @staticmethod
     def clearScreen() -> None:
-        """ (None) -> None
-
-        Não recebe nada e executa o comando para limpar a tela do console.
+        """Limpa a tela do console.
         """
         system("clear")
 
     @staticmethod
     def showTitle() -> None:
-        """ (None) -> None
-
-        Não recebe nada e executa o comando para mostrar na tela o título.
+        """Mostra o título do jogo.
         """
         print("### Seja bem vindo ao jogo Blackjack! ###\n")
 
     @staticmethod
     def showPlayer(i: int) -> None:
-        """ (int) -> None
+        """Mostra o número da vez do jogador.
 
-        Recebe um inteiro e executa o comando para mostrar na tela o número da vez.
+        Keyword arguments:
+            i -- valor (int)
         """
         print(f"\n----- Jogador {i} -----\n")
 
     @staticmethod
     def showPlayerTurn(name: str) -> None:
-        """ (str) -> None
+        """Mostra quando for a vez do jogador.
 
-        Recebe uma str e executa o comando para mostrar na tela o nome do Player da vez.
+        Keyword arguments:
+            name -- Nome do jogador (type str)
         """
         print(f"\n----- Vez de {name} -----\n")
 
     @staticmethod
     def showChampion(players: List[Player]) -> None:
-        """ (list<Player>) -> None
+        """Verifica se houve empate ou teve um campeão no jogo.
 
-        Recebe uma list de Player e executa o comando para mostrar na tela o se houve um único ganhador ou empate.
+        Keyword arguments:
+            players -- lista de jogadores (type list[Player])
         """
         if len(players) > 1:
             print("### Empate ###\n")
@@ -53,8 +52,6 @@ class UI:
 
     @staticmethod
     def noChampion() -> None:
-        """ (None) -> None
-
-        Não recebe nada e executa o comando para mostrar na tela que todos os Players perderam.
+        """Mostra que todos os jogadores perderam.
         """
         print("\nTodos os jogadores perdaram.")
