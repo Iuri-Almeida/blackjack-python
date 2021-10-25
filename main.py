@@ -1,8 +1,11 @@
-# Porjeto Blackjack com POO
-# Autor: Iuri Almeida
-# Referências: https://github.com/Iuri-Almeida/blackjack
-# Data: 24/10/2021
-# Descrição: Jogo de Blackjack
+"""
+    Nome do Porjeto: Blackjack com POO
+    Autor: Iuri Almeida
+    Referências: https://github.com/Iuri-Almeida/blackjack
+    Data: 24/10/2021
+    Descrição: Jogo de Blackjack
+    GitHub: https://github.com/Iuri-Almeida/blackjack-python
+"""
 
 from application.ui import UI
 from application.constants import Constants
