@@ -1,5 +1,5 @@
-class Player:
-    """ Player representa a entidade do jogador que participa da partida de Blackjack.
+class Player(object):
+    """Player representa a entidade do jogador que participa da partida de Blackjack.
 
     Attributes:
         name -- Nome do jogador (type str)
@@ -10,8 +10,8 @@ class Player:
     def __init__(self, name: str) -> None:
         """Construtor: cria um objeto Player.
 
-        Keyword arguments:
-            name -- Nome do jogador (type str)
+        Args:
+            name: Nome do jogador
         """
         self.__name = name
         self.__points: int = 0
@@ -23,7 +23,7 @@ class Player:
         """Monta o texto para ser apresentado na tela.
 
         Returns:
-            object:
+            str: texto com os atributos da classe Player
         """
         return f'name: {self.__name}, points: {self.__points}, is_playing: {self.__is_playing}, ' \
                f'has_overcome: {self.__has_overcome} '
@@ -31,18 +31,27 @@ class Player:
     @property
     def name(self) -> str:
         """Propriedade get do nome.
+
+        Returns:
+            str: nome do jogador
         """
         return self.__name
 
     @property
     def points(self) -> int:
         """Propriedade get dos pontos.
+
+        Returns:
+            int: quantidade de pontos
         """
         return self.__points
 
     @property
     def has_overcome(self) -> bool:
         """Propriedade get para saber se o jogador ultrapassou os 21 pontos.
+
+        Returns:
+            bool: se o jogador ultrapassou 21 pontos
         """
         return self.__has_overcome
 
@@ -50,8 +59,11 @@ class Player:
     def has_overcome(self, has_overcome: bool) -> None:
         """Propriedade set para definir se o jogador ultrapassou os 21 pontos.
 
-        Keyword arguments:
-            has_overcome -- booleano (type bool)
+        Args:
+            has_overcome: booleano
+
+        Returns:
+            None
         """
         if isinstance(has_overcome, bool):
             self.__has_overcome = has_overcome
@@ -62,6 +74,9 @@ class Player:
     @property
     def is_playing(self) -> bool:
         """Propriedade get para saber se o jogador ainda está jogando.
+
+        Returns:
+            bool: se o jogador ainda está jogando
         """
         return self.__is_playing
 
@@ -69,8 +84,11 @@ class Player:
     def is_playing(self, is_playing: bool) -> None:
         """Propriedade set para definir se o jogador vai continuar jogando.
 
-        Keyword arguments:
-            is_playing -- booleano (type bool)
+        Args:
+            is_playing: booleano
+
+        Returns:
+            None
         """
         if isinstance(is_playing, bool):
             self.__is_playing = is_playing
@@ -80,8 +98,11 @@ class Player:
     def increase_points(self, points: int) -> None:
         """Faz o incremento dos pontos do jogador.
 
-        Keyword arguments:
-            points -- pontos a serem acrescidos (type int)
+        Args:
+            points: pontos a serem acrescidos
+
+        Returns:
+            None
         """
         if isinstance(points, int):
             self.__points += points

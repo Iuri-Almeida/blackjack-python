@@ -1,5 +1,5 @@
-class Constants:
-    """ Constants representa os valores constantes do jogo Blackjack.
+class Constants(object):
+    """Constants representa os valores constantes do jogo Blackjack.
     """
     TWENTY_ONE: int = 21
     MIN_PLAYERS: int = 2

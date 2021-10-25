@@ -10,15 +10,18 @@
 from application.ui import UI
 from application.constants import Constants
 from entities.player import Player
+from util.color import Color
 from random import randint
-from typing import List
 
 
-def find_champion(players: List[Player]) -> List[Player]:
+def find_champion(players: list[Player]) -> list[Player]:
     """Encontra o campeão do jogo.
 
-    Keyword arguments:
-        players -- lista de jogadores (type list[Player])
+    Args:
+        players: lista de jogadores
+
+    Returns:
+        list[Player]: lista de jogadores
     """
     champion = []
 
@@ -35,8 +38,11 @@ def find_champion(players: List[Player]) -> List[Player]:
 def get_card_value(card: str) -> int:
     """Pega o valor da carta.
 
-    Keyword arguments:
-        card -- caractere do baralho (type str)
+    Args:
+        card: caractere do baralho
+
+    Returns:
+        int: valor da carta
     """
     if card.isnumeric():
         return int(card)
@@ -51,11 +57,14 @@ def get_card_value(card: str) -> int:
             return 13
 
 
-def get_card(deck: List[str]) -> str:
+def get_card(deck: list[str]) -> str:
     """Pega a carta no baralho de forma randômica.
 
-    Keyword arguments:
-        deck -- lista de caracteres (type list[str])
+    Args:
+        deck: lista de caracteres
+
+    Returns:
+        str: carta do baralho
     """
     random_number = randint(0, len(deck) - 1)
 
@@ -64,16 +73,20 @@ def get_card(deck: List[str]) -> str:
     return card
 
 
-def move(deck: List[str], player: Player) -> None:
+def move(deck: list[str], player: Player) -> None:
     """Realiza a jogada na partida.
 
-    Keyword arguments:
-        deck -- lista de caracteres (type list[str])
-        player -- jogador (type Player)
+    Args:
+        deck: lista de caracteres
+        player: jogador
+
+    Returns:
+        None
     """
-    answer = input(f"Você está com {player.points} ponto(s). Deseja continuar? (s/n) ").strip().lower()
+    answer = input(f"Você está com {Color.BOLD}{player.points}{Color.RESET} ponto(s). Deseja continuar? (s/n) ")
+    answer = answer.strip().lower()
     while answer != 's' and answer != 'n':
-        answer = input(f"Tente novamente. Deseja continuar? (s/n) ").strip().lower()
+        answer = input(f"{Color.COLOR_RED}Tente novamente. Deseja continuar? (s/n) {Color.RESET}").strip().lower()
 
     if answer == 's':
 
@@ -82,7 +95,8 @@ def move(deck: List[str], player: Player) -> None:
 
         player.increase_points(value)
 
-        print(f"Foi sorteado a carta {card} cujo valor é {value}. Você agora está com {player.points} ponto(s).")
+        print(f"Foi sorteado a carta {Color.BOLD}{card}{Color.RESET} cujo valor é {Color.BOLD}{value}{Color.RESET}. "
+              f"Você agora está com {Color.BOLD}{player.points}{Color.RESET} ponto(s).")
 
     else:
         player.is_playing = False
@@ -90,6 +104,9 @@ def move(deck: List[str], player: Player) -> None:
 
 def main() -> None:
     """Inicia o jogo.
+
+    Returns:
+        None
     """
     players: list[Player] = []
 
@@ -98,7 +115,7 @@ def main() -> None:
 
     n = input("Quantos jogadores jogarão? ")
     while not n.isnumeric() or int(n) > Constants.MAX_PLAYERS or int(n) < Constants.MIN_PLAYERS:
-        n = input("Erro na entrada dos valores. Quantos jogadores jogarão? ")
+        n = input(f"{Color.COLOR_RED}Erro na entrada dos valores. Quantos jogadores jogarão? {Color.RESET}")
 
     UI.clear_screen()
 
@@ -132,10 +149,10 @@ def main() -> None:
                 if player.points > Constants.TWENTY_ONE:
 
                     player.has_overcome = True
-                    print(f"\nJogador(a) {player.name} já ultrapassou 21 pontos.")
+                    print(f"\nJogador(a) {Color.BOLD}{player.name}{Color.RESET} já ultrapassou 21 pontos.")
 
                 elif not player.is_playing:
-                    print(f"\nJogador(a) {player.name} decidiu parar de jogar.")
+                    print(f"\nJogador(a) {Color.BOLD}{player.name}{Color.RESET} decidiu parar de jogar.")
 
     champion = find_champion(players)
 
