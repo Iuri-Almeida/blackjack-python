@@ -11,62 +11,72 @@ class Player:
         """
         self.__name = name
         self.__points: int = 0
-        self.__playing: bool = True
-        self.__overcomed: bool = False
-    
+        self.__isPlaying: bool = True
+        self.__hasOvercomed: bool = False
+
     def __str__(self) -> str:
         """ (Player) -> str
 
         Retorna uma string que o print() usa para imprimir um Player.
         """
-        return f'name: {self.__name}, points: {self.__points}, playing: {self.__playing}, overcomed: {self.__overcomed}'
+        return f'name: {self.__name}, points: {self.__points}, isPlaying: {self.__isPlaying}, hasOvercomed: {self.__hasOvercomed}'
 
-    def getName(self) -> str:
+    @property
+    def name(self) -> str:
         """ (Player) -> str
 
         Recebe um Player e retorna o seu nome.
         """
         return self.__name
-    
-    def getPoints(self) -> int:
+
+    @property
+    def points(self) -> int:
         """ (Player) -> int
 
         Recebe um Player e retorna a sua quantidade de pontos.
         """
         return self.__points
-    
+
+    @property
     def hasOvercomed(self) -> bool:
         """ (Player) -> bool
 
         Recebe um Player e retorna se já ultrapassou 21 pontos.
         """
-        return self.__overcomed
-    
+        return self.__hasOvercomed
+
+    @hasOvercomed.setter
+    def hasOvercomed(self, hasOvercomed: bool) -> None:
+        """ (Player) -> None
+
+        Recebe um Player e um bool e modifica as duas situações do Player (maior que 21 e se ainda está jogando).
+        """
+        if isinstance(hasOvercomed, bool):
+            self.__hasOvercomed = hasOvercomed
+            self.isPlaying = False
+        else: raise TypeError(f'Parâmetro {hasOvercomed} precisa ser do tipo bool.')
+
+    @property
     def isPlaying(self) -> bool:
         """ (Player) -> bool
 
         Recebe um Player e retorna se ainda está jogando.
         """
-        return self.__playing
+        return self.__isPlaying
+
+    @isPlaying.setter
+    def isPlaying(self, isPlaying: bool) -> None:
+        """ (Player, bool) -> None
+
+        Recebe um Player e um bool e modifica a situação do Player em relação ao jogo (se ainda está jogando).
+        """
+        if isinstance(isPlaying, bool): self.__isPlaying = isPlaying
+        else: raise TypeError(f'Parâmetro {isPlaying} precisa ser do tipo bool.')
 
     def increasePoints(self, points: int) -> None:
         """ (Player, int) -> None
 
         Recebe um Player e um inteiro e modifica os pontos atuais somando com o inteiro de entrada.
         """
-        self.__points += points
-    
-    def putSituation(self, playing: bool) -> None:
-        """ (Player, bool) -> None
-
-        Recebe um Player e um bool e modifica a situação do Player em relação ao jogo (se ainda está jogando).
-        """
-        self.__playing = playing
-    
-    def putOvercomed(self, overcomed: bool) -> None:
-        """ (Player) -> None
-
-        Recebe um Player e um bool e modifica as duas situações do Player (maior que 21 e se ainda está jogando).
-        """
-        self.__overcomed = overcomed
-        self.putSituation(False)
+        if isinstance(points, int): self.__points += points
+        else: raise TypeError(f'Parâmetro {points} precisa ser do tipo int.')

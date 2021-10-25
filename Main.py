@@ -19,9 +19,9 @@ def getChampion(players: List[Player]) -> List[Player]:
     champion = []
 
     for player in players:
-        if not player.hasOvercomed():
-            if not champion or (player.getPoints() == champion[0].getPoints()): champion.append(player)
-            elif (21 - player.getPoints()) < (21 - champion[0].getPoints()): champion = [player]
+        if not player.hasOvercomed:
+            if not champion or (player.points == champion[0].points): champion.append(player)
+            elif (21 - player.points) < (21 - champion[0].points): champion = [player]
     
     return champion
 
@@ -56,7 +56,7 @@ def move(deck: List[str], player: Player) -> None:
 
     Recebe uma lista de str e um Player e modifica seus valores conforme forem jogando.
     """
-    answer = input(f"Você está com {player.getPoints()} ponto(s). Deseja continuar? (s/n) ").strip().lower()
+    answer = input(f"Você está com {player.points} ponto(s). Deseja continuar? (s/n) ").strip().lower()
     while answer != 's' and answer != 'n':
         answer = input(f"Tente novamente. Deseja continuar? (s/n) ").strip().lower()
 
@@ -67,9 +67,9 @@ def move(deck: List[str], player: Player) -> None:
         
         player.increasePoints(value)
 
-        print(f"Foi sorteado a carta {card} cujo valor é {value}. Você agora está com {player.getPoints()} ponto(s).")
+        print(f"Foi sorteado a carta {card} cujo valor é {value}. Você agora está com {player.points} ponto(s).")
     
-    else: player.putSituation(False)
+    else: player.isPlaying = False
 
 
 def main() -> None:
@@ -105,22 +105,22 @@ def main() -> None:
     
     deck = Constants.CARDS
 
-    while list(filter(lambda p: p.isPlaying(), players)) and deck:
+    while list(filter(lambda p: p.isPlaying, players)) and deck:
 
         for player in players:
 
-            if player.getPoints() <= Constants.TWENTY_ONE and player.isPlaying():
+            if player.points <= Constants.TWENTY_ONE and player.isPlaying:
 
-                UI.showPlayerTurn(player.getName())
+                UI.showPlayerTurn(player.name)
 
                 move(deck, player)
 
-                if player.getPoints() > Constants.TWENTY_ONE:
+                if player.points > Constants.TWENTY_ONE:
 
-                    player.putOvercomed(True)
-                    print(f"\nJogador(a) {player.getName()} já ultrapassou 21 pontos.")
+                    player.hasOvercomed = True
+                    print(f"\nJogador(a) {player.name} já ultrapassou 21 pontos.")
                 
-                elif not player.isPlaying(): print(f"\nJogador(a) {player.getName()} decidiu parar de jogar.")
+                elif not player.isPlaying: print(f"\nJogador(a) {player.name} decidiu parar de jogar.")
     
     champion = getChampion(players)
 

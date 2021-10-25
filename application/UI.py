@@ -46,10 +46,10 @@ class UI:
         if len(players) > 1:
             print("### Empate ###\n")
             for player in players:
-                print(f"- {player.getName()} com {player.getPoints()} ponto(s).")
+                print(f"- {player.name} com {player.points} ponto(s).")
         else:
             print("\n### Ganhador(a) ###\n")
-            print(f"{players[0].getName()} com {players[0].getPoints()} ponto(s).\n")
+            print(f"{players[0].name} com {players[0].points} ponto(s).\n")
 
     @staticmethod
     def noChampion() -> None:
