@@ -2,23 +2,25 @@ from os import system
 from typing import List
 from entities.player import Player
 
+
 class UI:
     """ UI representa a interface do usuário.
     """
+
     @staticmethod
-    def clearScreen() -> None:
+    def clear_screen() -> None:
         """Limpa a tela do console.
         """
         system("clear")
 
     @staticmethod
-    def showTitle() -> None:
+    def show_title() -> None:
         """Mostra o título do jogo.
         """
         print("### Seja bem vindo ao jogo Blackjack! ###\n")
 
     @staticmethod
-    def showPlayer(i: int) -> None:
+    def show_player(i: int) -> None:
         """Mostra o número da vez do jogador.
 
         Keyword arguments:
@@ -27,7 +29,7 @@ class UI:
         print(f"\n----- Jogador {i} -----\n")
 
     @staticmethod
-    def showPlayerTurn(name: str) -> None:
+    def show_player_turn(name: str) -> None:
         """Mostra quando for a vez do jogador.
 
         Keyword arguments:
@@ -36,7 +38,7 @@ class UI:
         print(f"\n----- Vez de {name} -----\n")
 
     @staticmethod
-    def showChampion(players: List[Player]) -> None:
+    def show_champion(players: List[Player]) -> None:
         """Verifica se houve empate ou teve um campeão no jogo.
 
         Keyword arguments:
@@ -51,7 +53,7 @@ class UI:
             print(f"{players[0].name} com {players[0].points} ponto(s).\n")
 
     @staticmethod
-    def noChampion() -> None:
+    def no_champion() -> None:
         """Mostra que todos os jogadores perderam.
         """
         print("\nTodos os jogadores perdaram.")

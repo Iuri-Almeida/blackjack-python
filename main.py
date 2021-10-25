@@ -14,7 +14,7 @@ from random import randint
 from typing import List
 
 
-def findChampion(players: List[Player]) -> List[Player]:
+def find_champion(players: List[Player]) -> List[Player]:
     """Encontra o campeão do jogo.
 
     Keyword arguments:
@@ -23,36 +23,43 @@ def findChampion(players: List[Player]) -> List[Player]:
     champion = []
 
     for player in players:
-        if not player.hasOvercomed:
-            if not champion or (player.points == champion[0].points): champion.append(player)
-            elif (Constants.TWENTY_ONE - player.points) < (Constants.TWENTY_ONE - champion[0].points): champion = [player]
-    
+        if not player.has_overcome:
+            if not champion or (player.points == champion[0].points):
+                champion.append(player)
+            elif (Constants.TWENTY_ONE - player.points) < (Constants.TWENTY_ONE - champion[0].points):
+                champion = [player]
+
     return champion
 
 
-def getCardValue(card: str) -> int:
+def get_card_value(card: str) -> int:
     """Pega o valor da carta.
 
     Keyword arguments:
         card -- caractere do baralho (type str)
     """
-    if card.isnumeric(): return int(card)
+    if card.isnumeric():
+        return int(card)
     else:
-        if card == 'A': return 1
-        elif card == 'J': return 11
-        elif card == 'Q': return 12
-        elif card == 'K': return 13
+        if card == 'A':
+            return 1
+        elif card == 'J':
+            return 11
+        elif card == 'Q':
+            return 12
+        elif card == 'K':
+            return 13
 
 
-def getCard(deck: List[str]) -> str:
+def get_card(deck: List[str]) -> str:
     """Pega a carta no baralho de forma randômica.
 
     Keyword arguments:
         deck -- lista de caracteres (type list[str])
     """
-    randomNumber = randint(0, len(deck) - 1)
+    random_number = randint(0, len(deck) - 1)
 
-    card = deck.pop(randomNumber)
+    card = deck.pop(random_number)
 
     return card
 
@@ -70,14 +77,15 @@ def move(deck: List[str], player: Player) -> None:
 
     if answer == 's':
 
-        card = getCard(deck)
-        value = getCardValue(card)
-        
-        player.increasePoints(value)
+        card = get_card(deck)
+        value = get_card_value(card)
+
+        player.increase_points(value)
 
         print(f"Foi sorteado a carta {card} cujo valor é {value}. Você agora está com {player.points} ponto(s).")
-    
-    else: player.isPlaying = False
+
+    else:
+        player.is_playing = False
 
 
 def main() -> None:
@@ -85,18 +93,18 @@ def main() -> None:
     """
     players: list[Player] = []
 
-    UI.clearScreen()
-    UI.showTitle()
+    UI.clear_screen()
+    UI.show_title()
 
     n = input("Quantos jogadores jogarão? ")
     while not n.isnumeric() or int(n) > Constants.MAX_PLAYERS or int(n) < Constants.MIN_PLAYERS:
         n = input("Erro na entrada dos valores. Quantos jogadores jogarão? ")
-    
-    UI.clearScreen()
+
+    UI.clear_screen()
 
     for i in range(int(n)):
 
-        UI.showPlayer(i + 1)
+        UI.show_player(i + 1)
 
         name = input("Digite o nome do jogador: ").strip().title()
 
@@ -107,31 +115,34 @@ def main() -> None:
 
         players.append(player)
 
-        UI.clearScreen()
-    
+        UI.clear_screen()
+
     deck = Constants.CARDS
 
-    while list(filter(lambda p: p.isPlaying, players)) and deck:
+    while list(filter(lambda p: p.is_playing, players)) and deck:
 
         for player in players:
 
-            if player.points <= Constants.TWENTY_ONE and player.isPlaying:
+            if player.points <= Constants.TWENTY_ONE and player.is_playing:
 
-                UI.showPlayerTurn(player.name)
+                UI.show_player_turn(player.name)
 
                 move(deck, player)
 
                 if player.points > Constants.TWENTY_ONE:
 
-                    player.hasOvercomed = True
+                    player.has_overcome = True
                     print(f"\nJogador(a) {player.name} já ultrapassou 21 pontos.")
-                
-                elif not player.isPlaying: print(f"\nJogador(a) {player.name} decidiu parar de jogar.")
-    
-    champion = findChampion(players)
 
-    if champion: UI.showChampion(champion)
-    else: UI.noChampion()
+                elif not player.is_playing:
+                    print(f"\nJogador(a) {player.name} decidiu parar de jogar.")
+
+    champion = find_champion(players)
+
+    if champion:
+        UI.show_champion(champion)
+    else:
+        UI.no_champion()
 
 
 if __name__ == "__main__":

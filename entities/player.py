@@ -4,8 +4,8 @@ class Player:
     Attributes:
         name -- Nome do jogador (type str)
         points -- Pontos do jogador (type int)
-        isPlaying -- Se esse jogador está jogando (type bool)
-        hasOvercomed -- Se esse jogador ultrapassou 21 pontos (type bool)
+        is_playing -- Se esse jogador está jogando (type bool)
+        has_overcome -- Se esse jogador ultrapassou 21 pontos (type bool)
     """
     def __init__(self, name: str) -> None:
         """Construtor: cria um objeto Player.
@@ -15,13 +15,18 @@ class Player:
         """
         self.__name = name
         self.__points: int = 0
-        self.__isPlaying: bool = True
-        self.__hasOvercomed: bool = False
+        self.__is_playing: bool = True
+        self.__has_overcome: bool = False
 
+    @property
     def __str__(self) -> str:
         """Monta o texto para ser apresentado na tela.
+
+        Returns:
+            object:
         """
-        return f'name: {self.__name}, points: {self.__points}, isPlaying: {self.__isPlaying}, hasOvercomed: {self.__hasOvercomed}'
+        return f'name: {self.__name}, points: {self.__points}, is_playing: {self.__is_playing}, ' \
+               f'has_overcome: {self.__has_overcome} '
 
     @property
     def name(self) -> str:
@@ -36,44 +41,49 @@ class Player:
         return self.__points
 
     @property
-    def hasOvercomed(self) -> bool:
+    def has_overcome(self) -> bool:
         """Propriedade get para saber se o jogador ultrapassou os 21 pontos.
         """
-        return self.__hasOvercomed
+        return self.__has_overcome
 
-    @hasOvercomed.setter
-    def hasOvercomed(self, hasOvercomed: bool) -> None:
+    @has_overcome.setter
+    def has_overcome(self, has_overcome: bool) -> None:
         """Propriedade set para definir se o jogador ultrapassou os 21 pontos.
 
         Keyword arguments:
-            hasOvercomed -- booleano (type bool)
+            has_overcome -- booleano (type bool)
         """
-        if isinstance(hasOvercomed, bool):
-            self.__hasOvercomed = hasOvercomed
-            self.isPlaying = False
-        else: raise TypeError(f'Parâmetro {hasOvercomed} precisa ser do tipo bool.')
+        if isinstance(has_overcome, bool):
+            self.__has_overcome = has_overcome
+            self.is_playing = False
+        else:
+            raise TypeError(f'Parâmetro {has_overcome} precisa ser do tipo bool.')
 
     @property
-    def isPlaying(self) -> bool:
+    def is_playing(self) -> bool:
         """Propriedade get para saber se o jogador ainda está jogando.
         """
-        return self.__isPlaying
+        return self.__is_playing
 
-    @isPlaying.setter
-    def isPlaying(self, isPlaying: bool) -> None:
+    @is_playing.setter
+    def is_playing(self, is_playing: bool) -> None:
         """Propriedade set para definir se o jogador vai continuar jogando.
 
         Keyword arguments:
-            isPlaying -- booleano (type bool)
+            is_playing -- booleano (type bool)
         """
-        if isinstance(isPlaying, bool): self.__isPlaying = isPlaying
-        else: raise TypeError(f'Parâmetro {isPlaying} precisa ser do tipo bool.')
+        if isinstance(is_playing, bool):
+            self.__is_playing = is_playing
+        else:
+            raise TypeError(f'Parâmetro {is_playing} precisa ser do tipo bool.')
 
-    def increasePoints(self, points: int) -> None:
+    def increase_points(self, points: int) -> None:
         """Faz o incremento dos pontos do jogador.
 
         Keyword arguments:
             points -- pontos a serem acrescidos (type int)
         """
-        if isinstance(points, int): self.__points += points
-        else: raise TypeError(f'Parâmetro {points} precisa ser do tipo int.')
+        if isinstance(points, int):
+            self.__points += points
+        else:
+            raise TypeError(f'Parâmetro {points} precisa ser do tipo int.')
