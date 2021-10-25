@@ -8,9 +8,10 @@ from application.UI import UI
 from application.Constants import Constants
 from entities.Player import Player
 from random import randint
+from typing import List
 
 
-def getChampion(players):
+def getChampion(players: List[Player]) -> List[Player]:
     """ (list<Player>) -> list<Player>
 
     Recebe uma lista de Player e retorna uma nova lista de player, podendo estar vazia.
@@ -25,7 +26,7 @@ def getChampion(players):
     return champion
 
 
-def getCardValue(card):
+def getCardValue(card: str) -> int:
     """ (str) -> int
 
     Recebe um str e retorna um int baseado no seu valor no baralho.
@@ -38,20 +39,19 @@ def getCardValue(card):
         elif card == 'K': return 13
 
 
-def getCardValues(deck):
-    """ (list<str>) -> str, int
+def getCard(deck: List[str]) -> str:
+    """ (list<str>) -> str
 
-    Recebe uma lista de str e retorna um str e um int baseado no seu valor no baralho.
+    Recebe uma lista de str e retorna um str do baralho.
     """
     randomNumber = randint(0, len(deck) - 1)
 
     card = deck.pop(randomNumber)
-    cardValue = getCardValue(card)
 
-    return card, cardValue
+    return card
 
 
-def move(deck, player):
+def move(deck: List[str], player: Player) -> None:
     """ (list<str>, Player) -> None
 
     Recebe uma lista de str e um Player e modifica seus valores conforme forem jogando.
@@ -62,7 +62,8 @@ def move(deck, player):
 
     if answer == 's':
 
-        card, value = getCardValues(deck)
+        card = getCard(deck)
+        value = getCardValue(card)
         
         player.increasePoints(value)
 
@@ -71,13 +72,12 @@ def move(deck, player):
     else: player.putSituation(False)
 
 
-def main():
+def main() -> None:
     """ (None) -> None
 
     Função principal do jogo Blackjack.
     """
-    # Lista de jogadores
-    players = []
+    players: list[Player] = []
 
     UI.clearScreen()
     UI.showTitle()
@@ -97,7 +97,7 @@ def main():
         while not name:
             name = input("Digite um nome para o jogador: ").strip().title()
 
-        player = Player(name)
+        player: Player = Player(name)
 
         players.append(player)
 
